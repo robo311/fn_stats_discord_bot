@@ -6,7 +6,7 @@ module.exports = {
 		.setDescription('Replies with information about current server.'),
 	async execute(interaction) {
     
-        console.log(interaction.guild.channels.cache)
+        console.log(interaction.guild)
 
         if(!interaction.inGuild()){
             interaction.reply({
@@ -24,10 +24,16 @@ module.exports = {
                 iconURL: interaction.guild.iconURL()
             })
             .addFields(
-                {name: "Owner", value: `<@${interaction.guild.ownerId}>`}
+                {name: "Owner", value: `<@${interaction.guild.ownerId}>`, inline: true },
+                {name: "Text Channels", value: `${interaction.guild.channels.cache.filter((c) => c.type === 0 ).toJSON().length}`, inline: true },
+                {name: "Voice Channels", value: `${interaction.guild.channels.cache.filter((c) => c.type === 2 ).toJSON().length}`, inline: true },
+                {name: "Number of members", value: `${interaction.guild.memberCount}`, inline: true },
+                {name: "Number of roles", value: `${interaction.guild.roles.cache.size}`, inline: true },
+                {name: "Number of roles", value: `${interaction.guild.roles.cache.size}`, inline: true },
+                {name: "List of roles", value: `${interaction.guild.roles.cache.map((role) => "<@&" + role.id + ">")}` },
             )
             .setFooter({
-                text: `Requested by: ${interaction.user.globalName}`,
+                text: `Requested by: ${interaction.user.globalName} | Created: ${interaction.guild.createdAt.toDateString()}`,
                 iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
             })
                 
