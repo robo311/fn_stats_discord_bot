@@ -60,7 +60,7 @@ module.exports = {
 			let embed = new EmbedBuilder()
 				.setColor("Red")
 				.setTitle("There was an error.")
-				.setDescription(`We were unable to get statistics for ${req.account.value}`)
+				.setDescription(`We were unable to get AES keys for ${req.account.value}`)
 			await interaction.reply({
 				embeds: [embed]
 			})
