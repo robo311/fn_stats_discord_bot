@@ -23,10 +23,6 @@ module.exports = {
             let embed = new EmbedBuilder()
 				.setColor("Random")
 				.setTitle(`AES Keys`)
-				.setAuthor({
-					name: `Requested by: ${interaction.user.globalName}`,
-					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
-				})
 				.addFields(
 					{name: "Build", value: `${req.build}`},
 				)
@@ -39,6 +35,10 @@ module.exports = {
                 .addFields(
 					{name: "Other files", value: ` \n`},
 				)
+				.setFooter({
+					text: `Requested by: ${interaction.user.globalName} | Created: ${interaction.guild.createdAt.toDateString()}`,
+					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
+				})
 
                 
             req.dynamicKeys.map((key)=> {

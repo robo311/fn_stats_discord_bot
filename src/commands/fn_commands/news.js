@@ -23,11 +23,11 @@ module.exports = {
             let embed = new EmbedBuilder()
 				.setColor("Random")
 				.setTitle(`Fortnite BR news`).setURL(req.br.image)
-				.setAuthor({
-					name: `Requested by: ${interaction.user.globalName}`,
+				.setImage(`${req.br.image}`)
+				.setFooter({
+					text: `Requested by: ${interaction.user.globalName} | Created: ${interaction.guild.createdAt.toDateString()}`,
 					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
 				})
-				.setImage(`${req.br.image}`)
 
             await interaction.reply({
                 embeds: [embed]

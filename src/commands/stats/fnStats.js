@@ -63,7 +63,7 @@ module.exports = {
 		let req = await axios.get(url, config)
 			.catch(console.error)
 	
-		if(!req) return interaction.reply({content: "An error occured, please try again later!"})
+		if(!req) return interaction.reply({content: "An error occured, please try again later!"}) 
 		
 		req = req.data.data
 
@@ -74,10 +74,6 @@ module.exports = {
 				embed = new EmbedBuilder()
 				.setColor("Random")
 				.setTitle(`Fortnite solo statistics for ${name}`)
-				.setAuthor({
-					name: `Requested by: ${interaction.user.globalName}`,
-					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
-				})
 				.addFields(
 					{name: " ", value: " \n"}
 				)
@@ -87,20 +83,20 @@ module.exports = {
 					{name: "Matches", value: `${req.stats.all.solo.matches.toLocaleString()}`, inline: true},
 					{name: "Kills", value: `${req.stats.all.solo.kills.toLocaleString()}`, inline: true},
 					{name: "K/D", value: `${req.stats.all.solo.kd.toFixed(2)}`, inline: true},
-					{name: "Kills per match", value: `${req.stats.all.solo.killsPerMatch}`, inline: true},
+					{name: "Kills per match", value: `${req.stats.all.solo.killsPerMatch.toFixed(2)}`, inline: true},
 					{name: "TOP 10", value: `${req.stats.all.solo.top10.toLocaleString()}`, inline: true},
 					{name: "TOP 25", value: `${req.stats.all.solo.top25.toLocaleString()}`, inline: true},
 					{name: "Players outlived", value: `${req.stats.all.solo.playersOutlived.toLocaleString()}`, inline: true},
 				)
+				.setFooter({
+					text: `Requested by: ${interaction.user.globalName} | Created: ${interaction.guild.createdAt.toDateString()}`,
+					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
+				})
 			}
 			else if(interaction.options.getString("mode") === "duos"){
 				embed = new EmbedBuilder()
 				.setColor("Random")
 				.setTitle(`Fortnite duos statistics for ${name}`)
-				.setAuthor({
-					name: `Requested by: ${interaction.user.globalName}`,
-					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
-				})
 				.addFields(
 					{name: " ", value: " \n"}
 				)
@@ -110,20 +106,20 @@ module.exports = {
 					{name: "Matches", value: `${req.stats.all.duo.matches.toLocaleString()}`, inline: true},
 					{name: "Kills", value: `${req.stats.all.duo.kills.toLocaleString()}`, inline: true},
 					{name: "K/D", value: `${req.stats.all.duo.kd.toFixed(2)}`, inline: true},
-					{name: "Kills per match", value: `${req.stats.all.duo.killsPerMatch}`, inline: true},
+					{name: "Kills per match", value: `${req.stats.all.duo.killsPerMatch.toFixed(2)}`, inline: true},
 					{name: "TOP 5", value: `${req.stats.all.duo.top5.toLocaleString()}`, inline: true},
 					{name: "TOP 12", value: `${req.stats.all.duo.top12.toLocaleString()}`, inline: true},
 					{name: "Players outlived", value: `${req.stats.all.duo.playersOutlived.toLocaleString()}`, inline: true},
 				)
+				.setFooter({
+					text: `Requested by: ${interaction.user.globalName} | Created: ${interaction.guild.createdAt.toDateString()}`,
+					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
+				})
 			}
 			else if(interaction.options.getString("mode") === "squads"){
 				embed = new EmbedBuilder()
 				.setColor("Random")
 				.setTitle(`Fortnite squads statistics for ${name}`)
-				.setAuthor({
-					name: `Requested by: ${interaction.user.globalName}`,
-					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
-				})
 				.addFields(
 					{name: " ", value: " \n"}
 				)
@@ -133,19 +129,19 @@ module.exports = {
 					{name: "Matches", value: `${req.stats.all.squad.matches.toLocaleString()}`, inline: true},
 					{name: "Kills", value: `${req.stats.all.squad.kills.toLocaleString()}`, inline: true},
 					{name: "K/D", value: `${req.stats.all.squad.kd.toFixed(2)}`, inline: true},
-					{name: "Kills per match", value: `${req.stats.all.squad.killsPerMatch}`, inline: true},
+					{name: "Kills per match", value: `${req.stats.all.squad.killsPerMatch.toFixed(2)}`, inline: true},
 					{name: "TOP 3", value: `${req.stats.all.squad.top3.toLocaleString()}`, inline: true},
 					{name: "TOP 6", value: `${req.stats.all.squad.top6.toLocaleString()}`, inline: true},
 					{name: "Players outlived", value: `${req.stats.all.squad.playersOutlived.toLocaleString()}`, inline: true},
 				)
+				.setFooter({
+					text: `Requested by: ${interaction.user.globalName} | Created: ${interaction.guild.createdAt.toDateString()}`,
+					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
+				})
 			}else if(interaction.options.getString("mode") === "overall"){
 				embed = new EmbedBuilder()
 				.setColor("Random")
 				.setTitle(`Fortnite overall statistics for ${name}`)
-				.setAuthor({
-					name: `Requested by: ${interaction.user.globalName}`,
-					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
-				})
 				.addFields(
 					{name: " ", value: " \n"}
 				)
@@ -155,11 +151,15 @@ module.exports = {
 					{name: "Matches", value: `${req.stats.all.overall.matches.toLocaleString()}`, inline: true},
 					{name: "Kills", value: `${req.stats.all.overall.kills.toLocaleString()}`, inline: true},
 					{name: "K/D", value: `${req.stats.all.overall.kd.toFixed(2)}`, inline: true},
-					{name: "Kills per match", value: `${req.stats.all.overall.killsPerMatch}`, inline: true},
+					{name: "Kills per match", value: `${req.stats.all.overall.killsPerMatch.toFixed(2)}`, inline: true},
 					{name: "TOP 10", value: `${req.stats.all.overall.top10.toLocaleString()}`, inline: true},
 					{name: "TOP 25", value: `${req.stats.all.overall.top25.toLocaleString()}`, inline: true},
 					{name: "Players outlived", value: `${req.stats.all.overall.playersOutlived.toLocaleString()}`, inline: true},
 				)
+				.setFooter({
+					text: `Requested by: ${interaction.user.globalName} | Created: ${interaction.guild.createdAt.toDateString()}`,
+					iconURL: `https://cdn.discordapp.com/avatars/${interaction.user.id}/${interaction.user.avatar}.png?size=256`
+				})
 			}
 			interaction.reply({
 				embeds: [embed]
