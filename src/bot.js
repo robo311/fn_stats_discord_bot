@@ -1,26 +1,11 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, ActivityType } = require('discord.js');
 
 
 require('dotenv').config()
 
-
-
-/* function getData(name,accountType,timeWindow){
-    const url = `https://fortnite-api.com/v2/stats/br/v2?name=${name}&accountType=${accountType}&timeWindow=${timeWindow}`
-
-    axios.get(url, config)
-    .then(res => {
-        getFNStats(res.data.data.stats)
-    })
-    .catch(err=> console.log(err))
-}
-
-function getFNStats(data){
-    console.log(data.all)
-} */
 
 
 const client = new Client({
@@ -65,11 +50,12 @@ for (const file of eventFiles) {
 }
 
 client.on('ready', (c) => {
-    /* const username = "EzBugattiXD"
-    const accountType = "epic"
-    const timeWindow = "season" */
     console.log(`${c.user.tag} is ready.`)
-    /* getData(username,accountType,timeWindow) */
+
+    client.user.setPresence({
+        activities: [{ type: ActivityType.Watching, name: "Fortnite statistics" }], status: 'dnd'
+    })
+    
 })
 
 
